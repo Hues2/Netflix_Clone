@@ -32,6 +32,9 @@ class HomeViewController: UIViewController {
         // MARK: Configure Nav Bar
         configureNavBar()
         
+        // MARK: Get trending Movies
+        getTrendingMovies()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +74,25 @@ class HomeViewController: UIViewController {
         navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.tintColor = .label
         
-        
     }
 
+    
+    
+    // MARK: Get Trending Movies
+    private func getTrendingMovies(){
+        APICaller.shared.getTrendingMovies { result in
+            switch result{
+            case .failure(let error):
+                print("\n \(error.localizedDescription) \n")
+                
+            case .success(let movies):
+                print("\n \(movies) \n")
+            }
+        }
+    }
+    
+    
+    
 }
 
 
