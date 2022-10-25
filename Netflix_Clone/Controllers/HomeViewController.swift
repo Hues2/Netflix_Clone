@@ -38,6 +38,15 @@ class HomeViewController: UIViewController {
         // MARK: Get Trending TV
         getTrendingTV()
         
+        //MARK: - Get Upcoming Shows
+        getUpcomingMovies()
+        
+        //MARK: - Get Popular
+        getPopular()
+        
+        //MARK: - Top Rated
+        getTopRated()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +93,9 @@ class HomeViewController: UIViewController {
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
                 
-            case .success(let movies):
-                print("\n \(movies) \n")
+            case .success(let shows):
+//                print("\n \(shows) \n")
+                print("\n done \n")
             }
         }
     }
@@ -97,11 +107,56 @@ class HomeViewController: UIViewController {
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
                 
-            case .success(let tv):
-                print("\n \(tv) \n")
+            case .success(let shows):
+//                print("\n \(shows) \n")
+                print("\n done \n")
             }
         }
     }
+    
+    //MARK: - Get Upcoming Movies
+    private func getUpcomingMovies(){
+        APICaller.shared.getUpcomingMovies(type: "movie") { result in
+            switch result{
+            case .failure(let error):
+                print("\n \(error.localizedDescription) \n")
+                
+            case .success(let shows):
+//                print("\n \(shows) \n")
+                print("\n done \n")
+            }
+        }
+    }
+    
+    //MARK: - Get Upcoming TV
+    private func getPopular(){
+        APICaller.shared.getPopular(type: "movie") { result in
+            switch result{
+            case .failure(let error):
+                print("\n \(error.localizedDescription) \n")
+                
+            case .success(let shows):
+//                print("\n \(shows) \n")
+                print("\n done \n")
+            }
+        }
+    }
+    
+    //MARK: - Get Top Rated
+    private func getTopRated(){
+        APICaller.shared.getTopRated(type: "movie") { result in
+            switch result{
+            case .failure(let error):
+                print("\n \(error.localizedDescription) \n")
+                
+            case .success(let shows):
+//                print("\n \(shows) \n")
+                print("\n done \n")
+            }
+        }
+    }
+    
+    
     
     
 }
