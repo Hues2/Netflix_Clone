@@ -21,6 +21,7 @@
 		2EADBE9E290816A00071CD53 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBE9D290816A00071CD53 /* UIImage.swift */; };
 		2EADBEA029082CD20071CD53 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBE9F29082CD20071CD53 /* APICaller.swift */; };
 		2EADBEA2290830AC0071CD53 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBEA1290830AC0071CD53 /* Movie.swift */; };
+		2EE4C6422908371000998BC8 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4C6412908371000998BC8 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2EADBE9D290816A00071CD53 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		2EADBE9F29082CD20071CD53 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		2EADBEA1290830AC0071CD53 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		2EE4C6412908371000998BC8 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				2EADBE9D290816A00071CD53 /* UIImage.swift */,
+				2EE4C6412908371000998BC8 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2CBC6E2907F14E008A8204 /* SearchViewController.swift in Sources */,
+				2EE4C6422908371000998BC8 /* String.swift in Sources */,
 				2EADBE9E290816A00071CD53 /* UIImage.swift in Sources */,
 				2EADBEA2290830AC0071CD53 /* Movie.swift in Sources */,
 				2E2CBC682907F0B7008A8204 /* MainTabBarViewController.swift in Sources */,

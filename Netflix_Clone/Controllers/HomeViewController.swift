@@ -35,6 +35,9 @@ class HomeViewController: UIViewController {
         // MARK: Get trending Movies
         getTrendingMovies()
         
+        // MARK: Get Trending TV
+        getTrendingTV()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,10 +45,6 @@ class HomeViewController: UIViewController {
     }
     
 
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//    }
     
     // MARK: Configure Table View
     private func configureTableView(){
@@ -80,7 +79,7 @@ class HomeViewController: UIViewController {
     
     // MARK: Get Trending Movies
     private func getTrendingMovies(){
-        APICaller.shared.getTrendingMovies { result in
+        APICaller.shared.getTrending(type: "movie") {  result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -91,6 +90,18 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: Get Trending TV Shows
+    private func getTrendingTV(){
+        APICaller.shared.getTrending(type: "tv") {  result in
+            switch result{
+            case .failure(let error):
+                print("\n \(error.localizedDescription) \n")
+                
+            case .success(let tv):
+                print("\n \(tv) \n")
+            }
+        }
+    }
     
     
 }
@@ -136,7 +147,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
 //        header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .label
-        header.textLabel?.text = header.textLabel?.text?.lowercased().capitalized
+        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
 }
 

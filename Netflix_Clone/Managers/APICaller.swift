@@ -20,8 +20,8 @@ class APICaller{
     private init(){}
     
     
-    func getTrendingMovies(completion: @escaping (Result<[Movie], Error>) -> ()){
-        guard let url = URL(string: "\(Constants.baseURL)/3/trending/all/day?api_key=\(Constants.API_KEY)") else { return }
+    func getTrending(type: String, completion: @escaping (Result<[Movie], Error>) -> ()){
+        guard let url = URL(string: "\(Constants.baseURL)/3/trending/\(type)/day?api_key=\(Constants.API_KEY)") else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             
@@ -48,4 +48,5 @@ class APICaller{
         
         task.resume()
     }
+
 }
