@@ -47,6 +47,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E0D00792908151C0028A4EE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2E2CBC402907ED91008A8204 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +73,7 @@
 		2E2CBC4B2907ED91008A8204 /* Netflix_Clone */ = {
 			isa = PBXGroup;
 			children = (
+				2E0D00792908151C0028A4EE /* Extensions */,
 				2E2CBC752907F858008A8204 /* Managers */,
 				2E2CBC742907F852008A8204 /* Resources */,
 				2E2CBC732907F838008A8204 /* Models */,
