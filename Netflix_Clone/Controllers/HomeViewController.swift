@@ -1,5 +1,5 @@
 //
-//  MainTabBarVC.swift
+//  HomeViewController.swift
 //  Netflix_Clone
 //
 //  Created by Greg Ross on 25/10/2022.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class MainTabBarVC: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
     }
     
 
