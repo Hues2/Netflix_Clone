@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
         return table
     }()
     
+    let sectionTitles: [String] = ["Trending Movies", "Popular", "Trending TV", "Upcoming Movies", "Top Rated"]
+    
 
 
     override func viewDidLoad() {
@@ -57,10 +59,17 @@ class HomeViewController: UIViewController {
     // MARK: Configure Nav Bar
     private func configureNavBar(){
         var image = UIImage(named: "netflixLogo")
-//        image = image?.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
-        image = image?.resizeImageTo(size: CGSize(width: 25, height: 40))
+        image = image?.changeSize(CGSize(width: 20, height: 35))
         image = image?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
+        ]
+        
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.tintColor = .label
         
         
     }
@@ -71,7 +80,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20 // --> 20 Sections, Each row will have its own header
+        return sectionTitles.count // --> Number of rows in this case. Each row will have its own header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,49 +107,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return 40
     }
     
-}
-
-
-
-//extension UIImage {
-//    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
-//        // Determine the scale factor that preserves aspect ratio
-//        let widthRatio = targetSize.width / size.width
-//        let heightRatio = targetSize.height / size.height
-//
-//        let scaleFactor = min(widthRatio, heightRatio)
-//
-//        // Compute the new image size that preserves aspect ratio
-//        let scaledImageSize = CGSize(
-//            width: size.width * scaleFactor,
-//            height: size.height * scaleFactor
-//        )
-//
-//        // Draw and return the resized UIImage
-//        let renderer = UIGraphicsImageRenderer(
-//            size: scaledImageSize
-//        )
-//
-//        let scaledImage = renderer.image { _ in
-//            self.draw(in: CGRect(
-//                origin: .zero,
-//                size: scaledImageSize
-//            ))
-//        }
-//
-//        return scaledImage
-//    }
-//}
-
-
-extension UIImage {
     
-    func resizeImageTo(size: CGSize) -> UIImage? {
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        self.draw(in: CGRect(origin: CGPoint.zero, size: size))
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return resizedImage
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+//        header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .label
+        header.textLabel?.text = header.textLabel?.text?.lowercased().capitalized
     }
 }
+
+
+
