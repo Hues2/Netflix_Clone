@@ -88,7 +88,8 @@ class HomeViewController: UIViewController {
     
     // MARK: Get Trending Movies
     private func getTrendingMovies(){
-        APICaller.shared.getTrending(type: "movie") {  result in
+        
+        APICaller.shared.getShows(type: .movie, apiUrl: .TRENDING) { result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -98,11 +99,23 @@ class HomeViewController: UIViewController {
                 print("\n done \n")
             }
         }
+        
+        
+//        APICaller.shared.getTrending(type: "movie") {  result in
+//            switch result{
+//            case .failure(let error):
+//                print("\n \(error.localizedDescription) \n")
+//
+//            case .success(let shows):
+////                print("\n \(shows) \n")
+//                print("\n done \n")
+//            }
+//        }
     }
     
     // MARK: Get Trending TV Shows
     private func getTrendingTV(){
-        APICaller.shared.getTrending(type: "tv") {  result in
+        APICaller.shared.getShows(type: .tv, apiUrl: .TRENDING) { result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -112,11 +125,12 @@ class HomeViewController: UIViewController {
                 print("\n done \n")
             }
         }
+
     }
     
     //MARK: - Get Upcoming Movies
     private func getUpcomingMovies(){
-        APICaller.shared.getUpcomingMovies(type: "movie") { result in
+        APICaller.shared.getShows(type: .movie, apiUrl: .UPCOMING) { result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -126,11 +140,12 @@ class HomeViewController: UIViewController {
                 print("\n done \n")
             }
         }
+
     }
     
-    //MARK: - Get Upcoming TV
+    //MARK: - Get Popular
     private func getPopular(){
-        APICaller.shared.getPopular(type: "movie") { result in
+        APICaller.shared.getShows(type: .movie, apiUrl: .POPULAR) { result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -140,11 +155,12 @@ class HomeViewController: UIViewController {
                 print("\n done \n")
             }
         }
+
     }
     
     //MARK: - Get Top Rated
     private func getTopRated(){
-        APICaller.shared.getTopRated(type: "movie") { result in
+        APICaller.shared.getShows(type: .movie, apiUrl: .TOPRATED) { result in
             switch result{
             case .failure(let error):
                 print("\n \(error.localizedDescription) \n")
@@ -154,6 +170,7 @@ class HomeViewController: UIViewController {
                 print("\n done \n")
             }
         }
+
     }
     
     

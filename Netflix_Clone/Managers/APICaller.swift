@@ -8,24 +8,57 @@
 import Foundation
 
 
+enum ApiUrl{
+    case TRENDING, UPCOMING, POPULAR, TOPRATED
+}
+
+enum showType: String{
+    case movie, tv
+}
+
+enum APIError: String, Error{
+    case invalidData = "The data returned from the API call was nil"
+    case returnedError = "The API repsonse contained an error"
+    case unableToDecode = "Could not decode the JSON response"
+}
+
+
+
 class APICaller{
     static let shared = APICaller()
     
     private init(){}
     
     //MARK: - Trending
-    func getTrending(type: String, completion: @escaping (Result<[Show], Error>) -> ()){
-        guard let url = URL(string: "\(Constants.baseURL)/3/trending/\(type)/day?api_key=\(Constants.API_KEY)") else { return }
+    func getShows(type: showType, apiUrl: ApiUrl, completion: @escaping (Result<[Show], APIError>) -> ()){
+        
+        var urlString: String
+        
+        switch apiUrl{
+        case .TRENDING:
+            urlString = "\(Constants.baseURL)/3/trending/\(type.rawValue)/day?api_key=\(Constants.API_KEY)"
+        
+        case .POPULAR:
+            urlString = "\(Constants.baseURL)/3/\(type.rawValue)/popular?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+            
+        case.TOPRATED:
+            urlString = "\(Constants.baseURL)/3/\(type.rawValue)/top_rated?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+            
+        case .UPCOMING:
+            urlString = "\(Constants.baseURL)/3/\(type.rawValue)/upcoming?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+        }
+        
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             
             guard error == nil else{
-                print("\n 1.--> \(error?.localizedDescription ?? "Error fetching trending movies") \n")
+                completion(.failure(.returnedError))
                 return
             }
             
             guard let data else {
-                print("\n Data is nill \n")
+                completion(.failure(.invalidData))
                 return
             }
             
@@ -35,92 +68,11 @@ class APICaller{
                 completion(.success(results.results))
 
             } catch {
-                print("\n 2.--> \(error.localizedDescription) \n")
-                completion(.failure(error))
+                completion(.failure(.unableToDecode))
             }
         }
         
         task.resume()
     }
     
-    //MARK: - Upcoming
-    func getUpcomingMovies(type: String, completion: @escaping (Result<[Show], Error>) -> ()){
-        guard let url = URL(string: "\(Constants.baseURL)/3/\(type)/upcoming?api_key=\(Constants.API_KEY)&language=en-US&page=1") else { return }
-        
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            
-            guard error == nil else{
-                print("\n 1.--> \(error?.localizedDescription ?? "Error fetching trending movies") \n")
-                return
-            }
-            
-            guard let data else { print("\n Data is nill \n"); return}
-            
-            
-            do {
-                let results = try JSONDecoder().decode(TrendingShowsResponse.self, from: data)
-                completion(.success(results.results))
-
-            } catch {
-                print("\n 2.--> \(error.localizedDescription) \n")
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
-    }
-    
-    //MARK: - Popular
-    func getPopular(type: String, completion: @escaping (Result<[Show], Error>) -> ()){
-        guard let url = URL(string: "\(Constants.baseURL)/3/\(type)/popular?api_key=\(Constants.API_KEY)&language=en-US&page=1") else { return }
-        
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            
-            guard error == nil else{
-                print("\n 1.--> \(error?.localizedDescription ?? "Error fetching trending movies") \n")
-                return
-            }
-            
-            guard let data else { print("\n Data is nill \n"); return}
-            
-            
-            do {
-                let results = try JSONDecoder().decode(TrendingShowsResponse.self, from: data)
-                completion(.success(results.results))
-
-            } catch {
-                print("\n 2.--> \(error.localizedDescription) \n")
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
-    }
-    
-    func getTopRated(type: String, completion: @escaping (Result<[Show], Error>) -> ()){
-        guard let url = URL(string: "\(Constants.baseURL)/3/\(type)/top_rated?api_key=\(Constants.API_KEY)&language=en-US&page=1") else { return }
-        
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            
-            guard error == nil else{
-                print("\n 1.--> \(error?.localizedDescription ?? "Error fetching trending movies") \n")
-                return
-            }
-            
-            guard let data else { print("\n Data is nill \n"); return}
-            
-            
-            do {
-                let results = try JSONDecoder().decode(TrendingShowsResponse.self, from: data)
-                completion(.success(results.results))
-
-            } catch {
-                print("\n 2.--> \(error.localizedDescription) \n")
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
-    }
-
 }
