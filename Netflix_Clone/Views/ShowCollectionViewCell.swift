@@ -42,7 +42,6 @@ class ShowCollectionViewCell: UICollectionViewCell {
     
     public func configure(with model: String){
         guard let url = URL(string: Constants.baseImageURL + model) else { return }
-        print("\n \(url) \n")
         
         // Save in cache
         posterImageView.sd_setImage(with: url)
