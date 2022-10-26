@@ -17,10 +17,12 @@ class CollectionViewTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 140, height: 200)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(ShowCollectionViewCell.self, forCellWithReuseIdentifier: ShowCollectionViewCell.identifier)
         return collectionView
         
     }()
+    
+    private var shows = [Show]()
     
     
     
@@ -32,7 +34,7 @@ class CollectionViewTableViewCell: UITableViewCell {
         
     }
     
-    
+    // MARK: Layout Subviews
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
@@ -55,6 +57,15 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     
+    // MARK: Configure
+    public func configure(with shows: [Show]){
+        self.shows = shows
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    
 
 }
 
@@ -62,13 +73,20 @@ class CollectionViewTableViewCell: UITableViewCell {
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemGreen
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShowCollectionViewCell.identifier, for: indexPath) as? ShowCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        guard let image = shows[indexPath.row].poster_path else{
+            return UICollectionViewCell()
+        }
+        
+        cell.configure(with: image)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return shows.count
     }
     
     

@@ -7,6 +7,17 @@
 
 import UIKit
 
+
+
+enum Sections: Int{
+    case Trendingmovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case Upcoming = 3
+    case TopRated = 4
+}
+
+
 class HomeViewController: UIViewController {
     
     
@@ -31,21 +42,6 @@ class HomeViewController: UIViewController {
         
         // MARK: Configure Nav Bar
         configureNavBar()
-        
-        // MARK: Get trending Movies
-        getTrendingMovies()
-        
-        // MARK: Get Trending TV
-        getTrendingTV()
-        
-        //MARK: - Get Upcoming Shows
-        getUpcomingMovies()
-        
-        //MARK: - Get Popular
-        getPopular()
-        
-        //MARK: - Top Rated
-        getTopRated()
         
     }
     
@@ -84,94 +80,7 @@ class HomeViewController: UIViewController {
         
     }
 
-    
-    
-    // MARK: Get Trending Movies
-    private func getTrendingMovies(){
-        
-        APICaller.shared.getShows(type: .movie, apiUrl: .TRENDING) { result in
-            switch result{
-            case .failure(let error):
-                print("\n \(error.localizedDescription) \n")
-                
-            case .success(let shows):
-//                print("\n \(shows) \n")
-                print("\n done \n")
-            }
-        }
-        
-        
-//        APICaller.shared.getTrending(type: "movie") {  result in
-//            switch result{
-//            case .failure(let error):
-//                print("\n \(error.localizedDescription) \n")
-//
-//            case .success(let shows):
-////                print("\n \(shows) \n")
-//                print("\n done \n")
-//            }
-//        }
-    }
-    
-    // MARK: Get Trending TV Shows
-    private func getTrendingTV(){
-        APICaller.shared.getShows(type: .tv, apiUrl: .TRENDING) { result in
-            switch result{
-            case .failure(let error):
-                print("\n \(error.localizedDescription) \n")
-                
-            case .success(let shows):
-//                print("\n \(shows) \n")
-                print("\n done \n")
-            }
-        }
-
-    }
-    
-    //MARK: - Get Upcoming Movies
-    private func getUpcomingMovies(){
-        APICaller.shared.getShows(type: .movie, apiUrl: .UPCOMING) { result in
-            switch result{
-            case .failure(let error):
-                print("\n \(error.localizedDescription) \n")
-                
-            case .success(let shows):
-//                print("\n \(shows) \n")
-                print("\n done \n")
-            }
-        }
-
-    }
-    
-    //MARK: - Get Popular
-    private func getPopular(){
-        APICaller.shared.getShows(type: .movie, apiUrl: .POPULAR) { result in
-            switch result{
-            case .failure(let error):
-                print("\n \(error.localizedDescription) \n")
-                
-            case .success(let shows):
-//                print("\n \(shows) \n")
-                print("\n done \n")
-            }
-        }
-
-    }
-    
-    //MARK: - Get Top Rated
-    private func getTopRated(){
-        APICaller.shared.getShows(type: .movie, apiUrl: .TOPRATED) { result in
-            switch result{
-            case .failure(let error):
-                print("\n \(error.localizedDescription) \n")
-                
-            case .success(let shows):
-//                print("\n \(shows) \n")
-                print("\n done \n")
-            }
-        }
-
-    }
+   
     
     
     
@@ -195,6 +104,58 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             return UITableViewCell()
             
         }
+        
+        switch indexPath.section{
+            
+        case Sections.Trendingmovies.rawValue:
+            APICaller.shared.getShows(type: .movie, apiUrl: .TRENDING) { result in
+                switch result{
+                case .success(let shows):
+                    cell.configure(with: shows)
+                case .failure(let apiError):
+                    print("\n \(apiError.rawValue) \n")
+                }
+            }
+        case Sections.TrendingTv.rawValue:
+            APICaller.shared.getShows(type: .tv, apiUrl: .TRENDING) { result in
+                switch result{
+                case .success(let shows):
+                    cell.configure(with: shows)
+                case .failure(let apiError):
+                    print("\n \(apiError.rawValue) \n")
+                }
+            }
+        case Sections.Popular.rawValue:
+            APICaller.shared.getShows(type: .movie, apiUrl: .POPULAR) { result in
+                switch result{
+                case .success(let shows):
+                    cell.configure(with: shows)
+                case .failure(let apiError):
+                    print("\n \(apiError.rawValue) \n")
+                }
+            }
+        case Sections.Upcoming.rawValue:
+            APICaller.shared.getShows(type: .movie, apiUrl: .UPCOMING) { result in
+                switch result{
+                case .success(let shows):
+                    cell.configure(with: shows)
+                case .failure(let apiError):
+                    print("\n \(apiError.rawValue) \n")
+                }
+            }
+        case Sections.TopRated.rawValue:
+            APICaller.shared.getShows(type: .movie, apiUrl: .TOPRATED) { result in
+                switch result{
+                case .success(let shows):
+                    cell.configure(with: shows)
+                case .failure(let apiError):
+                    print("\n \(apiError.rawValue) \n")
+                }
+            }
+        default:
+            return UITableViewCell()
+        }
+        
         
         return cell
         

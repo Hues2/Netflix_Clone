@@ -22,6 +22,9 @@
 		2EADBEA029082CD20071CD53 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBE9F29082CD20071CD53 /* APICaller.swift */; };
 		2EB0487529085E8B007C4C5F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB0487429085E8B007C4C5F /* Constants.swift */; };
 		2EB048792908640A007C4C5F /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB048782908640A007C4C5F /* Show.swift */; };
+		2ED1C8D029091FBE00409751 /* ShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1C8CF29091FBE00409751 /* ShowCollectionViewCell.swift */; };
+		2ED1C8D32909235C00409751 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED1C8D22909235C00409751 /* SDWebImage */; };
+		2ED1C8D52909235C00409751 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED1C8D42909235C00409751 /* SDWebImageMapKit */; };
 		2EE4C6422908371000998BC8 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4C6412908371000998BC8 /* String.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,7 @@
 		2EADBE9F29082CD20071CD53 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		2EB0487429085E8B007C4C5F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
 		2EB048782908640A007C4C5F /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		2ED1C8CF29091FBE00409751 /* ShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EE4C6412908371000998BC8 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED1C8D52909235C00409751 /* SDWebImageMapKit in Frameworks */,
+				2ED1C8D32909235C00409751 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +124,7 @@
 			children = (
 				2E0D00752907F8B30028A4EE /* CollectionViewTableViewCell.swift */,
 				2E0D00772908018D0028A4EE /* HeroHeaderUIView.swift */,
+				2ED1C8CF29091FBE00409751 /* ShowCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +176,10 @@
 			dependencies = (
 			);
 			name = Netflix_Clone;
+			packageProductDependencies = (
+				2ED1C8D22909235C00409751 /* SDWebImage */,
+				2ED1C8D42909235C00409751 /* SDWebImageMapKit */,
+			);
 			productName = Netflix_Clone;
 			productReference = 2E2CBC492907ED91008A8204 /* Netflix_Clone.app */;
 			productType = "com.apple.product-type.application";
@@ -197,6 +208,9 @@
 				Base,
 			);
 			mainGroup = 2E2CBC402907ED91008A8204;
+			packageReferences = (
+				2ED1C8D12909235C00409751 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 2E2CBC4A2907ED91008A8204 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -227,6 +241,7 @@
 				2EE4C6422908371000998BC8 /* String.swift in Sources */,
 				2EADBE9E290816A00071CD53 /* UIImage.swift in Sources */,
 				2E2CBC682907F0B7008A8204 /* MainTabBarViewController.swift in Sources */,
+				2ED1C8D029091FBE00409751 /* ShowCollectionViewCell.swift in Sources */,
 				2EB048792908640A007C4C5F /* Show.swift in Sources */,
 				2E0D00762907F8B30028A4EE /* CollectionViewTableViewCell.swift in Sources */,
 				2E0D00782908018D0028A4EE /* HeroHeaderUIView.swift in Sources */,
@@ -446,6 +461,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2ED1C8D12909235C00409751 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2ED1C8D22909235C00409751 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ED1C8D12909235C00409751 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		2ED1C8D42909235C00409751 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ED1C8D12909235C00409751 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E2CBC412907ED91008A8204 /* Project object */;
 }
