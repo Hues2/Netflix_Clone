@@ -112,7 +112,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell else {
             return UITableViewCell()
         }
-        cell.configureCell(with: ShowViewModel(titleName: shows[indexPath.row].original_name ?? shows[indexPath.row].original_title ?? "Unknown" , posterUrl: shows[indexPath.row].poster_path ?? ""))
+        cell.configureCell(with: ShowModel(titleName: shows[indexPath.row].original_name ?? shows[indexPath.row].original_title ?? "Unknown" , posterUrl: shows[indexPath.row].poster_path ?? ""))
         return cell
     }
     

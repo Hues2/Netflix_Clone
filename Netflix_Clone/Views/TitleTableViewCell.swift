@@ -88,7 +88,7 @@ class TitleTableViewCell: UITableViewCell {
     }
     
     
-    public func configureCell(with show: ShowViewModel){
+    public func configureCell(with show: ShowModel){
         guard let url = URL(string: Constants.baseImageURL + show.posterUrl) else { return }
         
         self.showImage.sd_setImage(with: url)

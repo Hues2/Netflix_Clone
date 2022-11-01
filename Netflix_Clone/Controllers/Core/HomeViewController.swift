@@ -44,11 +44,6 @@ class HomeViewController: UIViewController {
         configureNavBar()
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
 
     
     // MARK: Configure Table View
@@ -80,11 +75,7 @@ class HomeViewController: UIViewController {
         
     }
 
-   
-    
-    
-    
-    
+
 }
 
 
@@ -104,6 +95,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             return UITableViewCell()
             
         }
+        
+        cell.delegate = self
         
         switch indexPath.section{
             
@@ -178,11 +171,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-//        header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .label
         header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
 }
 
+
+extension HomeViewController: CollectionViewTableViewCellDelegate{
+    
+    func collectionViewTableViewCellDidTapCell(model: ShowPreview) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = ShowPreviewViewController()
+            vc.configure(with: model)
+            self?.present(vc, animated: true)
+        }
+
+    }
+}
 
 

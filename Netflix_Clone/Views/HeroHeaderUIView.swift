@@ -38,9 +38,11 @@ class HeroHeaderUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         heroImageView.frame = bounds
+        
     }
     
     
@@ -48,10 +50,11 @@ class HeroHeaderUIView: UIView {
     private func configureImage(){
         addSubview(heroImageView)
         addGradient()
+        
     }
     
     // MARK: Fade gradient
-    private func addGradient(){
+    public func addGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,

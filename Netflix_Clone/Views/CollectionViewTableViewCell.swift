@@ -7,6 +7,13 @@
 
 import UIKit
 
+
+protocol CollectionViewTableViewCellDelegate: AnyObject{
+    func collectionViewTableViewCellDidTapCell(model: ShowPreview)
+}
+
+
+
 class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
@@ -23,6 +30,8 @@ class CollectionViewTableViewCell: UITableViewCell {
     }()
     
     private var shows = [Show]()
+    
+    weak var delegate: CollectionViewTableViewCellDelegate?
     
     
     
@@ -60,8 +69,8 @@ class CollectionViewTableViewCell: UITableViewCell {
     // MARK: Configure
     public func configure(with shows: [Show]){
         self.shows = shows
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        DispatchQueue.main.async {[weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
@@ -95,11 +104,13 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         
         guard let title = shows[indexPath.row].original_title ?? shows[indexPath.row].original_name else { return }
         
-        APICaller.shared.getMovie(with: title + " trailer") { result in
+        APICaller.shared.getMovie(with: title + " trailer") { [weak self] result in
+            guard let self else { return }
             switch result{
             case .success(let videoElement):
-                print("\n \(videoElement) \n")
                 
+                self.delegate?.collectionViewTableViewCellDidTapCell(model: ShowPreview(title: title, youtubeView: videoElement, titleOverview: self.shows[indexPath.row].overview ?? "No overview available."))
+                                
             case .failure(let error):
                 print("\n Error: \(error.localizedDescription) \n")
             }

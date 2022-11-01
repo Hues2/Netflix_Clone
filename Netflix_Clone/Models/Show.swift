@@ -24,3 +24,9 @@ struct Show: Codable{
     let release_date: String?
     let vote_average: Double
 }
+
+
+struct ShowModel{
+    let titleName: String
+    let posterUrl: String
+}

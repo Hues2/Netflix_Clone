@@ -21,3 +21,11 @@ struct IdVideoElement: Codable{
     let kind: String
     let videoId: String
 }
+
+
+
+struct ShowPreview{
+    let title: String
+    let youtubeView: VideoElement
+    let titleOverview: String
+}
