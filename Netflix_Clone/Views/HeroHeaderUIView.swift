@@ -14,17 +14,7 @@ class HeroHeaderUIView: UIView {
     private let downloadButton = UIButton()
 
     
-    private let heroImageView: UIImageView = {
-       
-        let imageView = UIImageView()
-        
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "heroImage")
-        
-        return imageView
-        
-    }()
+    private let heroImageView = UIImageView()
 
    
     override init(frame: CGRect) {
@@ -49,12 +39,14 @@ class HeroHeaderUIView: UIView {
     // MARK: Configure the image view
     private func configureImage(){
         addSubview(heroImageView)
+        heroImageView.contentMode = .scaleAspectFill
+        heroImageView.clipsToBounds = true
         addGradient()
         
     }
     
     // MARK: Fade gradient
-    public func addGradient(){
+    private func addGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,
@@ -96,6 +88,14 @@ class HeroHeaderUIView: UIView {
             downloadButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
+    }
+    
+    
+    
+    public func configure(with show: ShowModel){
+        guard let url = URL(string: Constants.baseImageURL + show.posterUrl) else { return }
+        
+        heroImageView.sd_setImage(with: url)
     }
     
     

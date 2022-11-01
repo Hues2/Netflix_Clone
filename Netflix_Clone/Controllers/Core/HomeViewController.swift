@@ -30,6 +30,8 @@ class HomeViewController: UIViewController {
     let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Popular", "Upcoming Movies", "Top Rated"]
     
 
+    private var headerView : HeroHeaderUIView?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,8 @@ class HomeViewController: UIViewController {
         // MARK: Configure Nav Bar
         configureNavBar()
         
+        // MARK: Configure Header View
+        configureHeaderView()
     }
 
     
@@ -53,7 +57,7 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
     }
     
@@ -75,6 +79,21 @@ class HomeViewController: UIViewController {
         
     }
 
+    // MARK: Configure Header View
+    private func configureHeaderView(){
+        APICaller.shared.getShows(type: .movie, apiUrl: .TRENDING) { [weak self] result in
+            switch result{
+            case .success(let shows):
+                let selectedShow = shows.randomElement()
+                self?.headerView?.configure(with: ShowModel(titleName: selectedShow?.original_title ?? "", posterUrl: selectedShow?.poster_path ?? ""))
+                
+            case .failure(let apiError):
+                print("\n \(apiError.rawValue) \n")
+            }
+        }
+    }
+    
+    
 
 }
 
