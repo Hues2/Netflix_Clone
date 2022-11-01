@@ -31,6 +31,7 @@ class ShowCollectionViewCell: UICollectionViewCell {
     private func configureImage(){
         contentView.addSubview(posterImageView)
         posterImageView.contentMode = .scaleAspectFill
+        posterImageView.clipsToBounds = true
     }
     
     override func layoutSubviews() {
@@ -45,6 +46,11 @@ class ShowCollectionViewCell: UICollectionViewCell {
         
         // Save in cache
         posterImageView.sd_setImage(with: url)
+    }
+    
+    
+    public func makeRoundedCorners(){
+        posterImageView.layer.cornerRadius = 10
     }
     
     

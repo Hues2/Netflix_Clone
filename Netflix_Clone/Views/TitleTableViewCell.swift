@@ -50,7 +50,7 @@ class TitleTableViewCell: UITableViewCell {
         
         
         NSLayoutConstraint.activate([
-            showImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            showImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             showImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             showImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             showImage.widthAnchor.constraint(equalToConstant: 100)

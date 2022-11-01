@@ -9,7 +9,7 @@ import Foundation
 
 
 enum ApiUrl{
-    case TRENDING, UPCOMING, POPULAR, TOPRATED
+    case TRENDING, UPCOMING, POPULAR, TOPRATED, DISCOVER
 }
 
 enum showType: String{
@@ -39,16 +39,53 @@ class APICaller{
             urlString = "\(Constants.baseURL)/3/trending/\(type.rawValue)/day?api_key=\(Constants.API_KEY)"
         
         case .POPULAR:
-            urlString = "\(Constants.baseURL)/3/\(type.rawValue)/popular?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+            urlString = "\(Constants.baseURL)/3/\(type.rawValue.lowercased())/popular?api_key=\(Constants.API_KEY)&language=en-US&page=1"
             
         case.TOPRATED:
             urlString = "\(Constants.baseURL)/3/\(type.rawValue)/top_rated?api_key=\(Constants.API_KEY)&language=en-US&page=1"
             
         case .UPCOMING:
             urlString = "\(Constants.baseURL)/3/\(type.rawValue)/upcoming?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+            
+        case .DISCOVER:
+            urlString = "\(Constants.baseURL)/3/discover/movie?api_key=\(Constants.API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"
         }
         
         guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            
+            guard error == nil else{
+                completion(.failure(.returnedError))
+                return
+            }
+            
+            guard let data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            
+            do {
+                let results = try JSONDecoder().decode(TrendingShowsResponse.self, from: data)
+                completion(.success(results.results))
+
+            } catch {
+                completion(.failure(.unableToDecode))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
+    
+    func search(with query: String, completion: @escaping (Result<[Show], APIError>) -> ()){
+        
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else {
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             

@@ -51,9 +51,9 @@ class MainTabBarViewController: UITabBarController {
         return vc1
     }
 
-    // MARK: Tab Bar
+    // MARK: Configure Tab Bar
     private func configureTabBar(){
-        tabBar.tintColor = .label
+        tabBar.tintColor = .systemRed
     }
 
 }

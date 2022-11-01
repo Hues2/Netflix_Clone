@@ -99,6 +99,10 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource{
         return 10
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     
     
 }

@@ -20,6 +20,7 @@
 		2E2CBC702907F16B008A8204 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2CBC6F2907F16B008A8204 /* DownloadsViewController.swift */; };
 		2E647C702911177A008D35DB /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E647C6F2911177A008D35DB /* TitleTableViewCell.swift */; };
 		2E647C7229111A8D008D35DB /* ShowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E647C7129111A8D008D35DB /* ShowViewModel.swift */; };
+		2E647C7429112E9B008D35DB /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E647C7329112E9B008D35DB /* SearchResultsViewController.swift */; };
 		2EADBE9E290816A00071CD53 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBE9D290816A00071CD53 /* UIImage.swift */; };
 		2EADBEA029082CD20071CD53 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EADBE9F29082CD20071CD53 /* APICaller.swift */; };
 		2EB0487529085E8B007C4C5F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB0487429085E8B007C4C5F /* Constants.swift */; };
@@ -46,6 +47,7 @@
 		2E2CBC6F2907F16B008A8204 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		2E647C6F2911177A008D35DB /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2E647C7129111A8D008D35DB /* ShowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewModel.swift; sourceTree = "<group>"; };
+		2E647C7329112E9B008D35DB /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		2EADBE9D290816A00071CD53 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		2EADBE9F29082CD20071CD53 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		2EB0487429085E8B007C4C5F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -107,7 +109,6 @@
 				2E2CBC552907ED93008A8204 /* Assets.xcassets */,
 				2E2CBC572907ED93008A8204 /* LaunchScreen.storyboard */,
 				2E2CBC5A2907ED93008A8204 /* Info.plist */,
-				2E2CBC672907F0B7008A8204 /* MainTabBarViewController.swift */,
 			);
 			path = Netflix_Clone;
 			sourceTree = "<group>";
@@ -115,10 +116,8 @@
 		2E2CBC622907F04D008A8204 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2E2CBC692907F120008A8204 /* HomeViewController.swift */,
-				2E2CBC6B2907F133008A8204 /* UpcomingViewController.swift */,
-				2E2CBC6D2907F14E008A8204 /* SearchViewController.swift */,
-				2E2CBC6F2907F16B008A8204 /* DownloadsViewController.swift */,
+				2E647C7529112EC1008D35DB /* Core */,
+				2E647C7629112ED3008D35DB /* General */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -164,6 +163,26 @@
 				2EADBE9F29082CD20071CD53 /* APICaller.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		2E647C7529112EC1008D35DB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2E2CBC672907F0B7008A8204 /* MainTabBarViewController.swift */,
+				2E2CBC692907F120008A8204 /* HomeViewController.swift */,
+				2E2CBC6B2907F133008A8204 /* UpcomingViewController.swift */,
+				2E2CBC6D2907F14E008A8204 /* SearchViewController.swift */,
+				2E2CBC6F2907F16B008A8204 /* DownloadsViewController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2E647C7629112ED3008D35DB /* General */ = {
+			isa = PBXGroup;
+			children = (
+				2E647C7329112E9B008D35DB /* SearchResultsViewController.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +269,7 @@
 				2ED1C8D029091FBE00409751 /* ShowCollectionViewCell.swift in Sources */,
 				2EB048792908640A007C4C5F /* Show.swift in Sources */,
 				2E0D00762907F8B30028A4EE /* CollectionViewTableViewCell.swift in Sources */,
+				2E647C7429112E9B008D35DB /* SearchResultsViewController.swift in Sources */,
 				2E0D00782908018D0028A4EE /* HeroHeaderUIView.swift in Sources */,
 				2E647C702911177A008D35DB /* TitleTableViewCell.swift in Sources */,
 				2E2CBC702907F16B008A8204 /* DownloadsViewController.swift in Sources */,
