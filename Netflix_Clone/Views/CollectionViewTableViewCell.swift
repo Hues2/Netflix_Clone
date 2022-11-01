@@ -90,4 +90,20 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard let title = shows[indexPath.row].original_title ?? shows[indexPath.row].original_name else { return }
+        
+        APICaller.shared.getMovie(with: title + " trailer") { result in
+            switch result{
+            case .success(let videoElement):
+                print("\n \(videoElement) \n")
+                
+            case .failure(let error):
+                print("\n Error: \(error.localizedDescription) \n")
+            }
+        }
+    }
+    
 }
