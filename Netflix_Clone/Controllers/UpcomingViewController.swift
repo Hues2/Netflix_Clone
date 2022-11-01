@@ -9,7 +9,7 @@ import UIKit
 
 class UpcomingViewController: UIViewController {
     
-    private let upcomingTable = UITableView()
+    private let upcomingTable = UITableView(frame: .zero, style: .plain)
     
     private var shows = [Show]()
 
@@ -40,8 +40,8 @@ class UpcomingViewController: UIViewController {
     // MARK: Configure TableView
     private func configureTableView(){
         view.addSubview(upcomingTable)
-        upcomingTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        upcomingTable.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
+        upcomingTable.frame = view.bounds
         upcomingTable.delegate = self
         upcomingTable.dataSource = self
         
@@ -78,15 +78,27 @@ class UpcomingViewController: UIViewController {
 
 
 extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = shows[indexPath.row].original_name ?? shows[indexPath.row].original_title ?? ""
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configureCell(with: ShowViewModel(titleName: shows[indexPath.row].original_name ?? shows[indexPath.row].original_title ?? "Unknown" , posterUrl: shows[indexPath.row].poster_path ?? ""))
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 175
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
     
     
 }
