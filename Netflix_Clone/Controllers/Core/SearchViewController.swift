@@ -146,6 +146,7 @@ extension SearchViewController: UISearchResultsUpdating{
         guard let query = searchbar.text, !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               query.trimmingCharacters(in: .whitespacesAndNewlines).count >= 3,
               let resultsController = searchController.searchResultsController as? SearchResultsViewController else {
+            
             return
         }
         

@@ -75,6 +75,23 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     
+    
+    private func downloadTitleAt(show: Show){
+        print("\n Donwloading  \(show.original_name ?? show.original_title ?? "Unknown")... \n")
+        
+        DataPersistenceManager.shared.downloadShowWith(show: show) { result in
+            switch result{
+            case .success(_ ):
+                print("\n Downloaded to database \n")
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+                
+            case .failure(let error):
+                print("\n Failed  \n")
+            }
+        }
+        
+    }
+    
 
 }
 
@@ -115,6 +132,23 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
                 print("\n Error: \(error.localizedDescription) \n")
             }
         }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil){ [weak self] _ in
+            
+            guard let self else { return UIMenu()}
+            
+            let downloadAction = UIAction(title: "Download", image: nil, identifier: nil) { _ in
+                self.downloadTitleAt(show: self.shows[indexPath.row])
+            }
+            let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+            return menu
+        }
+        
+        return config
+        
     }
     
 }
