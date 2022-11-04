@@ -100,9 +100,42 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        showPreview(show: shows[indexPath.row]){
+            DispatchQueue.main.async {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+        }
+        
     }
     
     
     
+}
+
+
+extension UpcomingViewController {
+    
+    func showPreview(show: Show, completion: @escaping () -> ()){
+        let title = show.original_title ?? show.original_name ?? "Unknown"
+        
+        APICaller.shared.getMovie(with: title + " trailer") { [weak self] result in
+            guard let self else { return }
+            switch result{
+            case .success(let videoElement):
+                
+                DispatchQueue.main.async { [weak self] in
+                    let vc = ShowPreviewViewController()
+                    vc.configure(with: ShowPreview(title: title, youtubeView: videoElement, titleOverview: show.overview ?? "No overview available"))
+                    self?.present(vc, animated: true)
+                    completion()
+                }
+                
+            case .failure(let error):
+                print("\n Error: \(error.localizedDescription) \n")
+            }
+        }
+        
+        
+    }
 }

@@ -16,7 +16,7 @@ class TitleTableViewCell: UITableViewCell {
     private let showLabel = UILabel()
     
     private let playButton = UIButton()
-    
+
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
